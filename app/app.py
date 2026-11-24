@@ -5,6 +5,7 @@ import joblib
 import warnings
 import sys
 from pathlib import Path
+import urllib.request
 
 # Project root directory
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -27,9 +28,47 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 MODEL_PATH = PROJECT_ROOT / "models" / "deployment_pipeline.joblib"
 
 # Load trained pipeline
+
+# Page configuration (must come before other Streamlit commands)
+st.set_page_config(
+    page_title="Bank Marketing Prediction",
+    page_icon="🏦",
+    layout="wide"
+)
+
+# Load trained model
 @st.cache_resource
 def load_model():
+
+    MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    if not MODEL_PATH.is_file():
+
+        temp_path = MODEL_PATH.with_suffix(".tmp")
+
+        try:
+            with st.spinner("Downloading trained ML model..."):
+
+                urllib.request.urlretrieve(
+                    MODEL_URL,
+                    temp_path
+                )
+
+                if not temp_path.exists() or temp_path.stat().st_size == 0:
+                    raise RuntimeError("Downloaded model file is empty.")
+
+                temp_path.replace(MODEL_PATH)
+
+        except Exception as e:
+
+            if temp_path.exists():
+                temp_path.unlink()
+
+            st.error(f"Unable to download the trained model: {e}")
+            st.stop()
+
     return joblib.load(MODEL_PATH)
+
 
 deployment_pipeline = load_model()
 
