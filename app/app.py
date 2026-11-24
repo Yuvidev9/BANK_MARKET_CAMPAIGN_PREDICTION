@@ -10,6 +10,14 @@ import urllib.request
 # Project root directory
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
+
+# GitHub Release URL for the trained model
+MODEL_URL = "https://github.com/Yuvidev9/BANK_MARKET_CAMPAIGN_PREDICTION/releases/download/v1.0.0/deployment_pipeline.joblib"
+
+# Local path where the model will be stored
+MODEL_PATH = PROJECT_ROOT / "models" / "deployment_pipeline.joblib"
+
+
 # Add src directory to Python path
 sys.path.append(str(PROJECT_ROOT / "src"))
 
