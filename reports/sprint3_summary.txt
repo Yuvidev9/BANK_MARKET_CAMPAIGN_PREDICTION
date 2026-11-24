@@ -1,0 +1,38 @@
+
+BANK MARKETING CAMPAIGN PREDICTION
+SPRINT 3 - MODEL OPTIMIZATION AND FINAL EVALUATION
+
+Final Selected Model: Optimized Random Forest
+
+MODEL PERFORMANCE
+-----------------
+Accuracy  : 0.8836
+Precision : 0.5034
+Recall    : 0.3507
+F1 Score  : 0.4134
+ROC-AUC   : 0.7926
+
+OPTIMIZED HYPERPARAMETERS
+-------------------------
+{'n_estimators': 100, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': None}
+
+SMOTE
+-----
+Applied only to training data.
+Original test data remained unchanged.
+
+MODEL FILE
+----------
+models/best_bank_campaign_model.pkl
+
+EVALUATION REPORTS
+------------------
+reports/final_model_comparison.csv
+reports/optimized_model_metrics.csv
+reports/best_model_parameters.json
+
+VISUALIZATIONS
+--------------
+reports/figures/final_model_comparison.png
+reports/figures/optimized_rf_confusion_matrix.png
+reports/figures/optimized_rf_roc_curve.png
